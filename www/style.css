@@ -1,0 +1,236 @@
+.menutext > div > a.item {
+  text-transform: Uppercase !important;
+}
+             
+.ui.toggle.checkbox input#specificDates:checked~label:before {
+  background-color: #333333!important;
+}
+             
+#portname > div .item {
+  text-transform: capitalize;
+}
+             
+.ui.labeled.slider>.labels .label:nth-child(3n+1) {
+  color: black !important;
+}
+              
+.ui.labeled.slider>.labels .label {
+  color: transparent;
+}
+             
+             
+@media only screen and (min-width: 1200px){
+  .ui.ui.ui.grid.container {
+     width: calc(1127px + 12rem) !important;
+   }
+}
+            
+            
+#DataTables_Table_1{
+   border-top: .2em solid #794b02 !important;
+   width: 100%;
+   background: #fff;
+   margin: 1em 0;
+   border: 1px solid rgba(34,36,38,.15);
+   -webkit-box-shadow: none;
+   box-shadow: none;
+   border-radius: .28571429rem;
+   text-align: left;
+   vertical-align: middle;
+   color: rgba(0,0,0,.87);
+   border-collapse: separate;
+   border-spacing: 0;
+}
+            
+            
+table.dataTable thead th, table.dataTable thead td {
+     border-bottom: 1px solid #ddd !important;
+     background-color: #f9fafb;
+     padding: 22px 17px !important;
+}
+            
+table.dataTable thead .sorting_desc {
+     background-image: url(https://i.stack.imgur.com/lZlZ5.png) !important;
+     background-size: 7px;
+}
+            
+table.dataTable thead .sorting_asc {
+     background-image: url(https://www.pinclipart.com/picdir/big/130-1303175_navigate-up-arrow-comments-icon-arrow-up-svg.png) !important;
+     background-size: 7px;
+}
+            
+table.dataTable thead .sorting {
+     background-image: url(double-chevron.png) !important;
+     background-size: 10px;
+}
+            
+table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+     background-color: #ffffff !important;
+}
+            
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+      margin-bottom: 20px;
+}
+            
+select {
+      border: none;
+      background: transparent;
+}
+            
+#DataTables_Table_1_length label {
+      text-transform: uppercase;
+      font-weight: 800;
+}
+            
+.dataTables_wrapper .dataTables_filter input {
+      border: 2px solid #794b02;
+      border-radius: 3px;
+}
+            
+.dataTables_wrapper .dataTables_filter label {
+      text-transform: uppercase;
+      font-weight: 800;
+}
+            
+#DataTables_Table_1_info {
+      text-transform: uppercase;
+      font-style: italic;
+      color: #adacac;
+      font-size: 11px;
+}
+            
+a.paginate_button.current {
+      background: transparent !important;
+      border-bottom: none !important;
+      border-right: none !important;
+      border-left: none !important;
+      border-top: none !important;
+      cursor: pointer !important;
+}
+            
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+      border-bottom: none !important;
+      border-right: none !important;
+      border-left: none !important;
+      border-top: none !important;
+      background: transparent !important;
+      color: #79603c !important;
+}
+            
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+      background: #79603c !important;
+      border-radius: 5px !important;
+}
+            
+.dataTables_wrapper .dataTables_paginate .paginate_button:active{
+     box-shadow: none !important;
+}
+            
+#filteredTable {
+     overflow-x: scroll;
+}
+            
+.field_dist { 
+     margin: 15px 0px 6px 0px;
+}
+            
+.dwld_btn{
+     width: 100%;
+}
+            
+.form-group input:checked {
+     background: #79603c;
+}
+            
+.form-group span {
+     vertical-align: top;
+     margin-left: 8px;
+     text-transform: capitalize;
+}
+            
+.label_styl {
+     text-transform: uppercase;
+     font-weight: bold;
+}
+            
+.ui.slider.checkbox input:checked~label {
+     text-transform: uppercase;
+     font-weight: bold;
+     color: black;
+}
+            
+.ui.slider.checkbox input~label {
+     text-transform: uppercase;
+     font-weight: bold;
+     color: #bbbbbb !important;
+}
+            
+.ui.orange.basic.big.button.dwld_btn {
+     border-color: #79603c !important;
+     color: #79603c !important;
+     box-shadow: 0 0 0 1px #79603c inset !important;
+}
+            
+@media only screen and (min-width: 768px){
+     .col-height-align {
+          height: 230px;
+      }
+}
+            
+@media only screen and (max-width: 566px){
+      .ui.tabular.menu .item {
+           width: 30%;
+           font-size: smaller;
+       }
+}
+            
+@media only screen and (max-width: 530px){
+       .ui.menu.four.item .item {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+            font-size: 10px;
+        }
+}
+            
+.menutext {
+       margin-bottom: 50px;
+       margin-top: 70px;
+}
+            
+.position-align {
+       display: inline-block;
+       vertical-align: top;
+}
+            
+.segment-style {
+       color: #79603c;
+       background: #fffaf3 !important;
+       border-color: #c9bb9a !important;
+}
+            
+.position-align > h3 {
+       margin-bottom: 5px;
+}
+            
+#portDateCalender > div {
+       width: 100%;
+}
+            
+#portname{
+       margin-bottom: 25px;
+       text-transform: capitalize;
+}
+
+#selectedLanguage {
+    width: 5% !important;
+    float: right;
+    margin-top: -26px;
+}
+
+
+@media only screen and (max-width: 566px){
+      .ui.tabular.menu .item {
+           width: 30%;
+           font-size: smaller;
+       }
+}

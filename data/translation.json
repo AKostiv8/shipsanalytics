@@ -1,0 +1,405 @@
+{
+  "cultural_date_format": "%d-%m-%Y",
+  "languages": ["EN", "PL", "ES", "DE", "RU"],
+  "translation": [
+      {
+        "EN": "%d %B %Y",    
+        "PL": "%d.%m.%Y",
+        "ES": "%d/%m/%Y",
+        "DE": "%Y-%m-%d",
+        "RU": "%d.%m.%Y"
+      },
+      {
+        "EN": "%d %b %Y",    
+        "PL": "%d.%m.%Y",
+        "ES": "%d/%m/%Y",
+        "DE": "%Y-%m-%d",
+        "RU": "%d.%m.%Y"
+      },
+      {
+        "EN": "%d %B",    
+        "PL": "%d.%m",
+        "ES": "%d/%m",     
+        "DE": "%Y-%m",
+        "RU": "%d.%m"
+      },
+      {
+        "EN": "<b>%A, %d %b %Y</b> <br><span><b>Time: </b></span> %H:%M:%S",    
+        "PL": "<b>%d.%m.%Y</b> <br><span><b>Czas: </b></span> %H:%M:%S",
+        "ES": "<b>%d/%m/%Y</b> <br><span><b>Hora: </b></span> %H:%M:%S",
+        "DE": "<b>%Y-%m-%d</b> <br><span><b>Zeit: </b></span> %H:%M:%S",
+        "RU": "<b>%d.%m.%Y</b> <br><span><b>Время: </b></span> %H:%M:%S"
+      },
+      {
+       "EN": "Analytics", 
+       "PL": "Analityka",
+       "ES": "Analítica",
+       "DE": "Analytik",
+       "RU": "Аналитика"
+      },
+      { 
+       "EN": "observation info", 
+       "PL": "informacje o obserwacji",
+       "ES": "datos de observación",
+       "DE": "Beobachtungsinfo",
+       "RU": "информация наблюдения"
+      },
+      { 
+       "EN": "Distance Between Two Points", 
+       "PL": "Odległość Między Dwoma Punktami",
+       "ES": "Distancia Entre Dos Puntos",
+       "DE": "Abstand zwischen zwei Punkten",
+       "RU": "Расстояние Между Двумя Точками"
+      },
+      {
+        "EN": "charts",
+        "PL": "wykresy",
+        "ES": "gráficos",
+        "DE": "Diagramme",
+        "RU": "графики"
+      },
+      { 
+       "EN": "Maximum Distance:", 
+       "PL": "Maksymalna odległość:",
+       "ES": "Distancia Máxima:",
+       "DE": "Maximale Entfernung:",
+       "RU": "Максимальное Расстояние:"
+      },
+      {
+        "EN": "Ship current state:",
+        "PL": "Aktualny stan statku:",
+        "ES": "Estado actual del barco:",
+        "DE": "Schiff aktueller Zustand:",
+        "RU": "Текущее состояние корабля:"
+      },
+      { 
+       "EN": "Total Distance:", 
+       "PL": "Całkowity dystans:",
+       "ES": "Distancia total:",
+       "DE": "Gesamtentfernung:",
+       "RU": "Общее расстояние:"
+      },
+      { 
+       "EN": "Snoozing Time:", 
+       "PL": "Maksymalna odległość:",
+       "ES": "Tiempo de reposo:",
+       "DE": "Schlummerzeit:",
+       "RU": "Время отдыха:"
+      },
+      {
+        "EN": "Sailing Time:",
+        "PL": "Czas żeglowania:",
+        "ES": "Tiempo de navegar:",
+        "DE": "Segelzeit:",
+        "RU": "Время Плавания:"
+      },
+      {
+        "EN": "Maps",
+        "PL": "Mapy",
+        "ES": "Mapas",
+        "DE": "Karten",
+        "RU": "Карты"
+      },      
+      {
+        "EN": "Created by Anastasiia Kostiv for Appsilon",
+        "PL": "Stworzone przez Anastasiię Kostiv dla Appsilon",
+        "ES": "Creado por Anastasiia Kostiv para Appsilon",
+        "DE": "Erstellt von Anastasiia Kostiv für Appsilon",
+        "RU": "Создано Анастасией Костив для 'Appsilon'"
+      },
+      {
+        "EN": "Ship Info",
+        "PL": "Informacje O Statku",
+        "ES": "Información del barco",
+        "DE": "Schiffsinfo",
+        "RU": "Информация о Корабле"
+      },
+      {
+        "EN": "Ship Status",
+        "PL": "Stan Statku",
+        "ES": "Estado del buque",
+        "DE": "Schiffsstatus",
+        "RU": "Статус Корабля"
+      },
+      {
+        "EN": "Date and Time",
+        "PL": "Data i Czas",
+        "ES": "Fecha y hora",
+        "DE": "Datum und Uhrzeit",
+        "RU": "Дата и Время"
+      },
+      {
+        "EN": "TIME:",
+        "PL": "CZAS:",
+        "ES": "HORA:",
+        "DE": "ZEIT:",
+        "RU": "ВРЕМЯ:"
+      },
+      {
+        "EN": "Time:",
+        "PL": "Czas:",
+        "ES": "Hora:",
+        "DE": "Zeit:",
+        "RU": "Время:"
+      },
+      {
+        "EN": "DATE:",
+        "PL": "DATA:",
+        "ES": "FECHA:",
+        "DE": "DATUM:",
+        "RU": "ВРЕМЯ:"
+      },
+      {
+        "EN": "meters.",
+        "PL": "metrów.",
+        "ES": "metros.",
+        "DE": "Meter.",
+        "RU": "метров."
+      },
+      {
+        "EN": "minutes.",
+        "PL": "minuty.",
+        "ES": "minutos.",
+        "DE": "Minuten.",
+        "RU": "минут."
+      },
+      {
+        "EN": "Specify date(s)",
+        "PL": "Określ datę(y)",
+        "ES": "Especificar fecha(s)",
+        "DE": "Datum(e) angeben",
+        "RU": "Укажите дату(ы)"
+      },
+      {
+        "EN": "Observations",
+        "PL": "Obserwacje",
+        "ES": "Observaciones",
+        "DE": "Beobachtungen",
+        "RU": "Наблюдения"
+      },
+      {
+        "EN": "Ship type:",
+        "PL": "Typ statku:",
+        "ES": "Tipo de nave:",
+        "DE": "Schiffstyp:",
+        "RU": "Тип судна:"
+      },
+      {
+        "EN": "Ship Type: ",
+        "PL": "Typ Statku: ",
+        "ES": "Tipo de nave: ",
+        "DE": "Schiffstyp: ",
+        "RU": "Тип Судна: "
+      },
+      {
+        "EN": "Ship name:",
+        "PL": "Nazwa statku:",
+        "ES": "Nombre del barco:",
+        "DE": "Schiffsname:",
+        "RU": "Название судна:"
+      },
+      {
+        "EN": "Ship Name: ",
+        "PL": "Nazwa Statku: ",
+        "ES": "Nombre del barco: ",
+        "DE": "Schiffsname: ",
+        "RU": "Название Судна: "
+      },
+      {
+        "EN": "port map",
+        "PL": "mapa portu",
+        "ES": "mapa del puerto",
+        "DE": "Hafenkarte",
+        "RU": "карта порта"
+      },
+      {
+        "EN": "table",
+        "PL": "stół",
+        "ES": "mesa",
+        "DE": "Tabelle",
+        "RU": "таблица"
+      },
+      {
+        "EN": "Port Info",
+        "PL": "Informacje o porcie",
+        "ES": "Información del puerto",
+        "DE": "Port Info",
+        "RU": "Информация о Порте"
+      },
+      {
+        "EN": "Port Name:",
+        "PL": "Nazwa Portu:",
+        "ES": "Nombre del puerto:",
+        "DE": "Portname:",
+        "RU": "Название Порта:"
+      },
+      {
+        "EN": "Time",
+        "PL": "Czas",
+        "ES": "Hora",
+        "DE": "Zeit",
+        "RU": "Время"
+      },
+      {
+        "EN": "Hour(s):",
+        "PL": "Godzina(y):",
+        "ES": "Hora(s):",
+        "DE": "Zeit:",
+        "RU": "Час(ы):"
+      },
+      {
+        "EN": "Minute(s):",
+        "PL": "Minuta(y):",
+        "ES": "Minuto(s):",
+        "DE": "Minute:",
+        "RU": "Минута(ы):"
+      },
+      {
+        "EN": "Vessels Analytics",
+        "PL": "Analityka statków",
+        "ES": "Análisis de embarcaciones",
+        "DE": "Vessels Analytics",
+        "RU": "Аналитика судов"
+      },
+      {
+        "EN": "In Port:",
+        "PL": "W Porcie:",
+        "ES": "En puerto:",
+        "DE": "Im Hafen:",
+        "RU": "В Порту:"
+      },
+      {
+        "EN": "Parked:",
+        "PL": "Zaparkowany:",
+        "ES": "Estacionado:",
+        "DE": "Geparkt:",
+        "RU": "Припаркованные:"
+      },
+      {
+        "EN": "Moving:",
+        "PL": "W Ruchu:",
+        "ES": "En movimiento:",
+        "DE": "In Bewegung:",
+        "RU": "Припаркованные:"
+      },
+      {
+        "EN": "Map",
+        "PL": "Mapa",
+        "ES": "Mapa",
+        "DE": "Karte",
+        "RU": "Карта"
+      },
+      {
+        "EN": "Total number of vessels",
+        "PL": "Łączna liczba statków",
+        "ES": "Número total de embarcaciones",
+        "DE": "Gesamtzahl der Schiffe",
+        "RU": "Общее количество судов"
+      },
+      {
+        "EN": "Total number of vessels in the port",
+        "PL": "Łączna liczba statków w porcie",
+        "ES": "Número total de buques en el puerto",
+        "DE": "Gesamtzahl der Schiffe im Hafen",
+        "RU": "Общее количество судов"
+      },
+      {
+        "EN": "Average stop duration",
+        "PL": "Średni czas zatrzymania",
+        "ES": "Duración media de la parada",
+        "DE": "Durchschnittliche Stoppdauer",
+        "RU": "Средняя продолжительность остановки"
+      },
+      {
+        "EN": "Total capacity",
+        "PL": "Całkowita pojemność",
+        "ES": "Capacidad total",
+        "DE": "Gesamtkapazität",
+        "RU": "Общая вместимость"
+      },
+      {
+        "EN": "Download Filtered Data",
+        "PL": "Pobierz filtrowane dane",
+        "ES": "Descargar datos filtrados",
+        "DE": "Laden Sie gefilterte Daten herunter",
+        "RU": "Скачать отфильтрованные данные"
+      },
+      {
+        "EN": "Download",
+        "PL": "Pobieranie",
+        "ES": "Descargar",
+        "DE": "Herunterladen",
+        "RU": "Скачать"
+      },
+      {
+        "EN": "Number of vessels",
+        "PL": "Liczba statków",
+        "ES": "Número de buques",
+        "DE": "Anzahl der Schiffe",
+        "RU": "Количество судов"
+      },
+      {
+        "EN": "Number of vessels:",
+        "PL": "Liczba statków:",
+        "ES": "Número de buques:",
+        "DE": "Anzahl der Schiffe:",
+        "RU": "Количество судов:"
+      },
+      {
+        "EN": "Stop duration:",
+        "PL": "Czas trwania przystanku:",
+        "ES": "Duración de la parada:",
+        "DE": "Stoppdauer:",
+        "RU": "Продолжительность остановки:"
+      },
+      {
+        "EN": "Average time of a stop in minutes",
+        "PL": "Średni czas postoju w minutach",
+        "ES": "Tiempo medio de una parada en minutos",
+        "DE": "Durchschnittliche Zeit eines Stopps in Minuten",
+        "RU": "Среднее время остановки в минутах"
+      },
+      {
+        "EN": "Average stop duration by ship type",
+        "PL": "Średni czas trwania zatrzymania według typu statku",
+        "ES": "Duración media de las paradas por tipo de barco",
+        "DE": "Durchschnittliche Stoppdauer nach Schiffstyp",
+        "RU": "Средняя продолжительность остановки по типу судна"
+      },
+      {
+        "EN": "Sum capacity [DWT]:",
+        "PL": "Suma zdolności [DWT]:",
+        "ES": "Suma de capacidad [DWT]:",
+        "DE": "Gesamtkapazität [DWT]:",
+        "RU": "Суммарная емкость [DWT]:"
+      },
+      {
+        "EN": "Sum capacity [DWT]",
+        "PL": "Suma zdolności [DWT]",
+        "ES": "Suma de capacidad [DWT]",
+        "DE": "Gesamtkapazität [DWT]",
+        "RU": "Суммарная емкость [DWT]"
+      },
+      {
+        "EN": "Total capacity of vessels in the port",
+        "PL": "Całkowita pojemność statków w porcie",
+        "ES": "Capacidad total de buques en el puerto",
+        "DE": "Gesamtkapazität der Schiffe im Hafen",
+        "RU": "Общая вместимость судов в порту"
+      },
+      {
+        "EN": "SHIP TYPE:",
+        "PL": "TYP STATKU:",
+        "ES": "TIPO DE BUQUE:",
+        "DE": "SCHIFFSTYP:",
+        "RU": "ТИП СУДНА:"
+      },
+      {
+        "EN": "Port analysis",
+        "PL": "Analiza portów",
+        "ES": "Análisis de puertos",
+        "DE": "Portanalyse",
+        "RU": "Анализ порта"
+      }
+    ]
+}
