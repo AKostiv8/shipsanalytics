@@ -24,8 +24,8 @@ dataset_ship$date <- ymd(dataset_ship$date)
 dataset_ship <- dataset_ship[, -1]
 
 # File with translations
-i18n <- Translator$new(translation_json_path = "./data/translation.json")
-translator <- Translator$new(translation_json_path = "./data/translation.json")
+i18n <- Translator$new(translation_json_path = "data/translation.json")
+translator <- Translator$new(translation_json_path = "data/translation.json")
 i18n$set_translation_language("EN") # here you select the default translation to display
 
 
@@ -55,7 +55,7 @@ page <- function() {
     #shiny.i18n::usei18n(i18n)
     div(
         div(class="menutext", menu_line
-            ),
+        )
         
     )
 }
@@ -68,23 +68,43 @@ menu_line <- horizontal_menu(list(list(name = i18n$t("observation info"), link =
 )
 
 shiptypeInput <- selectInput("shiptype", NULL, choices = c(levels(dataset_ship$ship_type)))
+shiptypeInput_table <- selectInput("shiptype_table", NULL, choices = c(levels(dataset_ship$ship_type)))
+
 shipnameInput <- selectInput("shipname", NULL, choices = c("No values"))
+shipnameInput_table <- selectInput("shipname_table", NULL, choices = c("No values"))
 
 shipstatusInput <-  shiny::radioButtons("status", "",
-                                c("In move" = "move",
-                                  "Parked" = "parked",
-                                  "Both" = "both"),
-                                selected = "both")
+                                        c("In move" = "move",
+                                          "Parked" = "parked",
+                                          "Both" = "both"),
+                                        selected = "both")
+shipstatusInput_port <-  shiny::radioButtons("status_port", "",
+                                             c("In move" = "move",
+                                               "Parked" = "parked",
+                                               "Both" = "both"),
+                                             selected = "both")
+shipstatusInput_table <-  shiny::radioButtons("status_table", "",
+                                              c("In move" = "move",
+                                                "Parked" = "parked",
+                                                "Both" = "both"),
+                                              selected = "both")
 
 specifydateToggle <- checkbox_input("specificDates", i18n$t("Specify date(s)"), type = "slider", is_marked = FALSE)
-    
+specifydateToggle_port <- checkbox_input("specificDates_port", i18n$t("Specify date(s)"), type = "slider", is_marked = FALSE)
+specifydateToggle_table <- checkbox_input("specificDates_table", i18n$t("Specify date(s)"), type = "slider", is_marked = FALSE)
+
+
 selectdateInput <- selectInput("selectDate", NULL, choices = c("No values"), multiple = TRUE, selected = NULL)
+selectdateInput_table <- selectInput("selectDate_table", NULL, choices = c("No values"), multiple = TRUE, selected = NULL)
 
 portnameInput <- selectInput("portname", NULL, choices = levels(dataset_ship$port))
+portnameInput_charts <- selectInput("portname_charts", NULL, choices = levels(dataset_ship$port))
 
 hoursliderInput <- range_input("spec_hour", value = 10, value2 = 14, min = 0, max = 23, step = 1, class = "labeled ticked")
+hoursliderInput_chart <- range_input("spec_hour_chart", value = 10, value2 = 14, min = 0, max = 23, step = 1, class = "labeled ticked")
 
 minutesliderInput <- range_input("spec_minute", value = 1, value2 = 59, min = 1, max = 59, step = 1, class = "labeled ticked")
+minutesliderInput_chart <- range_input("spec_minute_chart", value = 1, value2 = 59, min = 1, max = 59, step = 1, class = "labeled ticked")
 
 dateInputCalender <- calendar("portDateCalender", type = "date", value = NULL, 
                               "Select Date", min = format(min(unique(dataset_ship$date)), '%d.%m.%Y'), 
@@ -118,7 +138,11 @@ root_page <- div(page(),
                                  tags$h2(i18n$t("Ship Status")),
                                  tags$label(class = "label_styl", i18n$t("Ship current state:")),
                                  div(class = "field_dist", 
-                                     shipstatusInput
+                                     shiny::radioButtons("status", "",
+                                                         c("In move" = "move",
+                                                           "Parked" = "parked",
+                                                           "Both" = "both"),
+                                                         selected = "both")
                                  )
                                  
                              )
@@ -141,12 +165,12 @@ root_page <- div(page(),
                              )
                          )
                      )
-    
+                     
                  ),
                  
                  div(class = "ui one column stackable grid container",
                      div(class = "column", 
-                         div(class = "ui horizontal divider", icon("dice d20"), i18n$t("Analytics")),
+                         div(class = "ui horizontal divider", icon("dice d20"), i18n$t("Analytics"))
                      )
                      
                      
@@ -202,7 +226,7 @@ root_page <- div(page(),
                                  htmlOutput("sailing_time")
                              )
                          )
-
+                         
                      )
                      
                      
@@ -212,7 +236,7 @@ root_page <- div(page(),
                  
                  div(class = "ui one column stackable grid container",
                      div(class = "column", 
-                         div(class = "ui horizontal divider", icon("globe"), i18n$t("Maps")),
+                         div(class = "ui horizontal divider", icon("globe"), i18n$t("Maps"))
                      ),
                      
                      div(class = "column", 
@@ -226,15 +250,15 @@ root_page <- div(page(),
                                               content = div(
                                                   leafletOutput('twoPointsDistance')
                                               ))
-                                         )
-                                    ),
+                             )
+                             )
                              
-    
+                             
                          )
                      )
                  )
-     
-            )
+                 
+)
 
 
 
@@ -253,14 +277,14 @@ other_page <- div(page(),
                                   
                                   tags$label(class = "label_styl", i18n$t("Ship current state:")),
                                   div(class = "field_dist", 
-                                      shipstatusInput
+                                      shipstatusInput_port
                                   ),
                                   
                                   div(class = "field_dist", 
-                                      specifydateToggle
+                                      specifydateToggle_port
                                   ),
                                   conditionalPanel(
-                                      condition = "input.specificDates == true",
+                                      condition = "input.specificDates_port == true",
                                       div(class = "field_dist", 
                                           dateInputCalender
                                       )
@@ -292,9 +316,9 @@ other_page <- div(page(),
                   
                   div(class = "ui one column stackable grid container",
                       div(class = "column", 
-                          div(class = "ui horizontal divider", icon("dice d20"), i18n$t("Vessels Analytics")),
+                          div(class = "ui horizontal divider", icon("dice d20"), i18n$t("Vessels Analytics"))
                       )
-
+                      
                   ),
                   
                   
@@ -338,7 +362,7 @@ other_page <- div(page(),
                   
                   div(class = "ui one column stackable grid container",
                       div(class = "column", 
-                          div(class = "ui horizontal divider", icon("anchor"), i18n$t("Map")),
+                          div(class = "ui horizontal divider", icon("anchor"), i18n$t("Map"))
                       ),
                       
                       div(class = "column", 
@@ -348,7 +372,7 @@ other_page <- div(page(),
                       )
                   )
                   
-            )
+)
 
 charts_page <- div(page(), 
                    div(class = "ui one column stackable grid container",
@@ -359,7 +383,7 @@ charts_page <- div(page(),
                                    
                                    tags$label(class = "label_styl", i18n$t("Port Name:")),
                                    div(class = "field_dist", 
-                                       portnameInput
+                                       portnameInput_charts
                                    )
                                    
                                )
@@ -368,13 +392,13 @@ charts_page <- div(page(),
                        
                    ),
                    
-                  
+                   
                    
                    
                    
                    div(class = "ui one column stackable grid container",
                        div(class = "column", 
-                           div(class = "ui horizontal divider", icon("anchor"), i18n$t("Maps")),
+                           div(class = "ui horizontal divider", icon("anchor"), i18n$t("Maps"))
                        ),
                        
                        div(class = "column", 
@@ -385,13 +409,13 @@ charts_page <- div(page(),
                                                 )), 
                                            list(menu = div(i18n$t("Average stop duration")), 
                                                 content = div(
-                                                     plotlyOutput("stop_vessels_graph_dur")
+                                                    plotlyOutput("stop_vessels_graph_dur")
                                                 )), 
                                            list(menu = div(i18n$t("Total capacity")), 
                                                 content = div(
-                                                     plotlyOutput("dwt_total_graph")
+                                                    plotlyOutput("dwt_total_graph")
                                                 ))
-                                         ))
+                               ))
                                
                            )
                        )
@@ -403,47 +427,47 @@ charts_page <- div(page(),
 
 table_page <- div(page(), 
                   div(class = "doubling stackable three column ui grid container",
-                    div(class = "column", 
-                        div(class = "ui segment", "",
-                            field(
-                                tags$h2(i18n$t("Ship Info")),
-                                
-                                tags$label(class = "label_styl", i18n$t("Ship type:")),
-                                div(class = "field_dist", 
-                                    shiptypeInput
-                                ),
-                                tags$label(class = "label_styl", i18n$t("Ship name:")),
-                                div(class = "field_dist", 
-                                    shipnameInput
-                                )
-                            )
-                        )
-                    ),
-                    div(class = "column", 
-                        div(class = "ui segment col-height-align", "",
-                            field(
-                                tags$h2(i18n$t("Ship Status")),
-                                tags$label(class = "label_styl", i18n$t("Ship current state:")),
-                                div(class = "field_dist", 
-                                    shipstatusInput
-                                )
-                                
-                            )
-                        )
-                    ),
-                    div(class = "column", 
-                        div(class = "ui segment col-height-align", "",
-                            field(
-                                tags$h2(i18n$t("Port Info")),
-                                tags$label(class = "label_styl", i18n$t("Port Name:")),
-                                div(class = "field_dist",
-                                    selectInput("portnameAll", NULL, choices = c("All", levels(dataset_ship$port)))
-                                )
-                                
-                            )
-                        )
-                    ),
-
+                      div(class = "column", 
+                          div(class = "ui segment", "",
+                              field(
+                                  tags$h2(i18n$t("Ship Info")),
+                                  
+                                  tags$label(class = "label_styl", i18n$t("Ship type:")),
+                                  div(class = "field_dist", 
+                                      shiptypeInput_table
+                                  ),
+                                  tags$label(class = "label_styl", i18n$t("Ship name:")),
+                                  div(class = "field_dist", 
+                                      shipnameInput_table
+                                  )
+                              )
+                          )
+                      ),
+                      div(class = "column", 
+                          div(class = "ui segment col-height-align", "",
+                              field(
+                                  tags$h2(i18n$t("Ship Status")),
+                                  tags$label(class = "label_styl", i18n$t("Ship current state:")),
+                                  div(class = "field_dist", 
+                                      shipstatusInput_table
+                                  )
+                                  
+                              )
+                          )
+                      ),
+                      div(class = "column", 
+                          div(class = "ui segment col-height-align", "",
+                              field(
+                                  tags$h2(i18n$t("Port Info")),
+                                  tags$label(class = "label_styl", i18n$t("Port Name:")),
+                                  div(class = "field_dist",
+                                      selectInput("portnameAll", NULL, choices = c("All", levels(dataset_ship$port)))
+                                  )
+                                  
+                              )
+                          )
+                      )
+                      
                   ),
                   
                   div(class = "ui two column stackable grid container",
@@ -452,50 +476,50 @@ table_page <- div(page(),
                               field(
                                   tags$h2(i18n$t("Date and Time")),
                                   div(class = "field_dist", 
-                                    specifydateToggle
+                                      specifydateToggle_table
                                   ),
                                   conditionalPanel(
-                                      condition = "input.specificDates == true",
+                                      condition = "input.specificDates_table == true",
                                       div(class = "field_dist", 
-                                        selectdateInput
+                                          selectdateInput_table
                                       )
                                   ),
                                   tags$br(),
                                   tags$label(class = "label_styl", i18n$t("Hour(s):")),
                                   div(class = "field_dist", 
-                                    hoursliderInput
+                                      hoursliderInput_chart
                                   ),
                                   tags$label(class = "label_styl", i18n$t("Minute(s):")),
                                   div(class = "field_dist", 
-                                    minutesliderInput
+                                      minutesliderInput_chart
                                   )
                               )
                           )
                       ),
                       div(class = "six wide column", 
-                            div(class = "ui segment", 
-                                tags$h2(i18n$t("Download Filtered Data")),
-                                downloadLink("downloadData",
-                                    div(class = "ui orange basic big button dwld_btn", icon("download"), 
-                                        i18n$t("Download"))
-                                )
-                            )
+                          div(class = "ui segment", 
+                              tags$h2(i18n$t("Download Filtered Data")),
+                              downloadLink("downloadData",
+                                           div(class = "ui orange basic big button dwld_btn", icon("download"), 
+                                               i18n$t("Download"))
+                              )
+                          )
                       )
                   ),
                   
                   div(class = "ui one column stackable grid container",
                       div(class = "column", 
-                          div(class = "ui horizontal divider", icon("th"), i18n$t("table")),
+                          div(class = "ui horizontal divider", icon("th"), i18n$t("table"))
                       ),
                       
                       div(class = "column", 
                           div(class = "ui raised segment", 
                               DT::dataTableOutput("filteredTable")  
                           )
-                      ),
-                  ),
+                      )
+                  )
                   
-             )
+)
 
 
 observationinfo_server <- function(input, output, session) {
@@ -578,10 +602,10 @@ observationinfo_server <- function(input, output, session) {
     
     snoozing_time <- reactive({
         filtered_vector <- filtered_data() %>%
-                                filter(is_parked == 1) 
+            filter(is_parked == 1) 
         
         filtered_vector <- as.numeric(difftime(strptime(paste(filtered_vector$DATETIME),"%Y-%m-%d %H:%M:%S"),
-                                                    strptime(paste(lag(filtered_vector$DATETIME)),"%Y-%m-%d %H:%M:%S")))
+                                               strptime(paste(lag(filtered_vector$DATETIME)),"%Y-%m-%d %H:%M:%S")))
         
         sum(filtered_vector, na.rm = TRUE)
         
@@ -640,7 +664,7 @@ observationinfo_server <- function(input, output, session) {
             addLegend("bottomright", pal = pal, values = format(filtered_data()[dist_vector, ]$DATETIME, '%H:%M:%S'),
                       title = i18n()$t("TIME:"),
                       opacity = 1
-                      ) %>%
+            ) %>%
             addProviderTiles(providers$CartoDB.DarkMatter)
     })
     
@@ -815,13 +839,13 @@ port_server <- function(input, output, session) {
     
     data_sample <- reactive({
         req(data_sample_by_ports())
-        req(input$status)
+        req(input$status_port)
         
         
-        if(input$status == "move"){
+        if(input$status_port == "move"){
             data_sample_by_ports() %>%
                 filter(is_parked == 0)
-        } else if(input$status == "parked"){
+        } else if(input$status_port == "parked"){
             data_sample_by_ports() %>%
                 filter(is_parked == 1)
         } else {
@@ -832,10 +856,10 @@ port_server <- function(input, output, session) {
     
     
     output$portmap <- renderLeaflet({
-         
+        
         pal <- 
-        colorFactor(palette = 'Pastel1', 
-        levels = data_sample()$ship_type)
+            colorFactor(palette = 'Pastel1', 
+                        levels = data_sample()$ship_type)
         
         leaflet() %>%
             addTiles() %>%  # Add default OpenStreetMap map tiles
@@ -871,11 +895,11 @@ port_server <- function(input, output, session) {
     })
     
     
-    observeEvent(input$specificDates,{
+    observeEvent(input$specificDates_port,{
         
         input$specificDates
         
-        if(!input$specificDates){
+        if(!input$specificDates_port){
             update_calendar(session, "portDateCalender", value = NULL)
         }
         
@@ -889,27 +913,27 @@ port_server <- function(input, output, session) {
         
         
         if(input$selectedLanguage == 'PL'){
-            shiny::updateRadioButtons(session, "status", label = "", 
+            shiny::updateRadioButtons(session, "status_port", label = "", 
                                       choices = c("W ruchu" = "move", "Zaparkowany" = "parked", "Obie" = "both"),
                                       selected = "both")
         }
         if(input$selectedLanguage == 'EN'){
-            shiny::updateRadioButtons(session, "status", label = "", 
+            shiny::updateRadioButtons(session, "status_port", label = "", 
                                       choices = c("In move" = "move", "Parked" = "parked", "Both" = "both"),
                                       selected = "both")
         }
         if(input$selectedLanguage == 'ES'){
-            shiny::updateRadioButtons(session, "status", label = "", 
+            shiny::updateRadioButtons(session, "status_port", label = "", 
                                       choices = c("Moviente" = "move", "Estacionado" = "parked", "Ambos" = "both"),
                                       selected = "both")
         }
         if(input$selectedLanguage == 'DE'){
-            shiny::updateRadioButtons(session, "status", label = "", 
+            shiny::updateRadioButtons(session, "status_port", label = "", 
                                       choices = c("Ziehen um" = "move", "Geparkt" = "parked", "Beide" = "both"),
                                       selected = "both")
         }
         if(input$selectedLanguage == 'RU'){
-            shiny::updateRadioButtons(session, "status", label = "", 
+            shiny::updateRadioButtons(session, "status_port", label = "", 
                                       choices = c("В Движении" = "move", "Припаркованные" = "parked", "Оба" = "both"),
                                       selected = "both")
         }
@@ -931,15 +955,15 @@ chart_server <- function(input, output, session) {
     })
     
     data_sample <- reactive({
-        req(input$portname)
+        req(input$portname_charts)
         
-       data_test <- dataset_ship %>%
+        data_test <- dataset_ship %>%
             mutate(date=as.factor(date)) %>%
-            filter(port == input$portname) %>%
+            filter(port == input$portname_charts) %>%
             group_by(date, ship_type) %>%
             summarise(ship_num_distinct=n_distinct(SHIPNAME))
-       
-       return(data_test)
+        
+        return(data_test)
     })
     
     num_vessels_port <- reactive({
@@ -954,12 +978,12 @@ chart_server <- function(input, output, session) {
     
     output$stop_vessels_graph_dur <- renderPlotly({
         
-        req(input$portname)
-
+        req(input$portname_charts)
+        
         
         dataset_ship %>%
             filter(is_parked == 1) %>%
-            filter(port == input$portname) %>% 
+            filter(port == input$portname_charts) %>% 
             group_by(ship_type, SHIPNAME) %>%
             arrange(date, DATETIME) %>%
             summarise(stop_dur=(mean(as.numeric(difftime(strptime(paste(DATETIME),"%Y-%m-%d %H:%M:%S"),
@@ -989,11 +1013,11 @@ chart_server <- function(input, output, session) {
     
     output$num_vessels_graph <- renderPlotly({
         
-        req(input$portname)
-
+        req(input$portname_charts)
+        
         dataset_ship %>%
             mutate(date=as.factor(format(date, i18n()$t('%d %b %Y')))) %>%
-            filter(port == input$portname) %>%
+            filter(port == input$portname_charts) %>%
             group_by(date, ship_type) %>%
             summarise(ship_num_distinct=n_distinct(SHIPNAME)) %>%
             #Drop unused factor levels in a subsetted data frame
@@ -1020,7 +1044,7 @@ chart_server <- function(input, output, session) {
     
     output$dwt_total_graph <- renderPlotly({
         dataset_ship %>%
-            filter(port == input$portname) %>%
+            filter(port == input$portname_charts) %>%
             select(ship_type, SHIPNAME, DWT, date) %>%
             mutate(date=as.factor(format(date, i18n()$t('%d %b %Y')))) %>%
             unique() %>%
@@ -1028,21 +1052,21 @@ chart_server <- function(input, output, session) {
             summarise(dwt_sum = sum(DWT, na.rm = TRUE)) %>%
             #Drop unused factor levels in a subsetted data frame
             mutate(ship_type = factor(ship_type)) %>%
-                plot_ly(x = ~date, y = ~dwt_sum, 
-                        type = 'bar', 
-                        color = ~ship_type, 
-                        colors = 'Pastel1',
-                        text = ~paste('<b>', date, '</b>',
-                                      '<br><b>', i18n()$t('Ship type:'), '</b>', ship_type,
-                                      '<br><b>', i18n()$t('Sum capacity [DWT]:'), '</b>', dwt_sum),
-                        hoverinfo = "text"
-                ) %>%
-                layout(yaxis = list(title = i18n()$t('Sum capacity [DWT]')),
-                       xaxis = list(title = '', tickangle = 315),
-                       barmode = 'stack',
-                       legend = list( orientation = "h", y = -0.4, xanchor = "center", x=0.5),
-                       title = i18n()$t('Total capacity of vessels in the port')
-                )
+            plot_ly(x = ~date, y = ~dwt_sum, 
+                    type = 'bar', 
+                    color = ~ship_type, 
+                    colors = 'Pastel1',
+                    text = ~paste('<b>', date, '</b>',
+                                  '<br><b>', i18n()$t('Ship type:'), '</b>', ship_type,
+                                  '<br><b>', i18n()$t('Sum capacity [DWT]:'), '</b>', dwt_sum),
+                    hoverinfo = "text"
+            ) %>%
+            layout(yaxis = list(title = i18n()$t('Sum capacity [DWT]')),
+                   xaxis = list(title = '', tickangle = 315),
+                   barmode = 'stack',
+                   legend = list( orientation = "h", y = -0.4, xanchor = "center", x=0.5),
+                   title = i18n()$t('Total capacity of vessels in the port')
+            )
         
     })
     
@@ -1073,19 +1097,19 @@ table_server <- function(input, output, session) {
     })
     
     shiptype <- reactive({
-        req(input$shiptype)
+        req(input$shiptype_table)
         
-        filter(port_info_data(), ship_type == input$shiptype)
+        filter(port_info_data(), ship_type == input$shiptype_table)
     })
     
     observeEvent(shiptype(), {
         choices <- unique(shiptype()$SHIPNAME)
-        updateSelectInput(session, "shipname", NULL, choices = choices)
+        updateSelectInput(session, "shipname_table", NULL, choices = choices)
     })
     
     observeEvent(port_info_data(), {
         choices <- unique(port_info_data()$ship_type)
-        updateSelectInput(session, "shiptype", NULL, choices = choices)
+        updateSelectInput(session, "shiptype_table", NULL, choices = choices)
     })
     
     
@@ -1094,83 +1118,85 @@ table_server <- function(input, output, session) {
         
         if(input$portnameAll == "St. Petersburg"){
             portData_sample <- dataset_ship[(inpolygon(dataset_ship$LAT, dataset_ship$LON, xp_st_patersburg, yp_st_patersburg, boundary = TRUE)), ] %>%
-                filter(hour(DATETIME) >= input$spec_hour[1] & hour(DATETIME) <= input$spec_hour[2]) %>%
-                filter(minute(DATETIME) >= input$spec_minute[1] & minute(DATETIME) <= input$spec_minute[2])
+                filter(hour(DATETIME) >= input$spec_hour_chart[1] & hour(DATETIME) <= input$spec_hour_chart[2]) %>%
+                filter(minute(DATETIME) >= input$spec_minute_chart[1] & minute(DATETIME) <= input$spec_minute_chart[2])
             
             return(portData_sample)
         }
         if(input$portnameAll == "Gdańsk"){
             portData_sample <- dataset_ship[(inpolygon(dataset_ship$LAT, dataset_ship$LON, xp_gdansk, yp_gdansk, boundary = TRUE)), ] %>%
-                filter(hour(DATETIME) >= input$spec_hour[1] & hour(DATETIME) <= input$spec_hour[2]) %>%
-                filter(minute(DATETIME) >= input$spec_minute[1] & minute(DATETIME) <= input$spec_minute[2])
+                filter(hour(DATETIME) >= input$spec_hour_chart[1] & hour(DATETIME) <= input$spec_hour_chart[2]) %>%
+                filter(minute(DATETIME) >= input$spec_minute_chart[1] & minute(DATETIME) <= input$spec_minute_chart[2])
             
             return(portData_sample)
         }
         if(input$portnameAll == "gothenborg"){
             portData_sample <- dataset_ship[(inpolygon(dataset_ship$LAT, dataset_ship$LON, xp_gothenborg, yp_gothenborg, boundary = TRUE)), ] %>%
-                filter(hour(DATETIME) >= input$spec_hour[1] & hour(DATETIME) <= input$spec_hour[2]) %>%
-                filter(minute(DATETIME) >= input$spec_minute[1] & minute(DATETIME) <= input$spec_minute[2])
+                filter(hour(DATETIME) >= input$spec_hour_chart[1] & hour(DATETIME) <= input$spec_hour_chart[2]) %>%
+                filter(minute(DATETIME) >= input$spec_minute_chart[1] & minute(DATETIME) <= input$spec_minute_chart[2])
             
             return(portData_sample)
         }
         if(input$portnameAll == "Kalingrad"){
             portData_sample <- dataset_ship[(inpolygon(dataset_ship$LAT, dataset_ship$LON, xp_kalingrad, yp_kalingrad, boundary = TRUE)), ] %>%
-                filter(hour(DATETIME) >= input$spec_hour[1] & hour(DATETIME) <= input$spec_hour[2]) %>%
-                filter(minute(DATETIME) >= input$spec_minute[1] & minute(DATETIME) <= input$spec_minute[2])
+                filter(hour(DATETIME) >= input$spec_hour_chart[1] & hour(DATETIME) <= input$spec_hour_chart[2]) %>%
+                filter(minute(DATETIME) >= input$spec_minute_chart[1] & minute(DATETIME) <= input$spec_minute_chart[2])
             
             
             return(portData_sample)
         }
         if(input$portnameAll == "Klaipeda"){
             portData_sample <- dataset_ship[(inpolygon(dataset_ship$LAT, dataset_ship$LON, xp_kleipeda, yp_kleipeda, boundary = TRUE)), ] %>%
-                filter(hour(DATETIME) >= input$spec_hour[1] & hour(DATETIME) <= input$spec_hour[2]) %>%
-                filter(minute(DATETIME) >= input$spec_minute[1] & minute(DATETIME) <= input$spec_minute[2])
+                filter(hour(DATETIME) >= input$spec_hour_chart[1] & hour(DATETIME) <= input$spec_hour_chart[2]) %>%
+                filter(minute(DATETIME) >= input$spec_minute_chart[1] & minute(DATETIME) <= input$spec_minute_chart[2])
             
             
             return(portData_sample)
         }
         if(input$portnameAll == "Gdynia"){
             portData_sample <- dataset_ship[(inpolygon(dataset_ship$LAT, dataset_ship$LON, xp_gdynia, yp_gdynia, boundary = TRUE)), ] %>%
-                filter(hour(DATETIME) >= input$spec_hour[1] & hour(DATETIME) <= input$spec_hour[2]) %>%
-                filter(minute(DATETIME) >= input$spec_minute[1] & minute(DATETIME) <= input$spec_minute[2])
+                filter(hour(DATETIME) >= input$spec_hour_chart[1] & hour(DATETIME) <= input$spec_hour_chart[2]) %>%
+                filter(minute(DATETIME) >= input$spec_minute_chart[1] & minute(DATETIME) <= input$spec_minute_chart[2])
             
             return(portData_sample) 
         }
         if(input$portnameAll == "All"){
-            portData_sample <- dataset_ship
+            portData_sample <- dataset_ship %>%
+                filter(hour(DATETIME) >= input$spec_hour_chart[1] & hour(DATETIME) <= input$spec_hour_chart[2]) %>%
+                filter(minute(DATETIME) >= input$spec_minute_chart[1] & minute(DATETIME) <= input$spec_minute_chart[2])
             return(portData_sample) 
         }
     })
     
     
     data_sample <- reactive({
-        req(input$shiptype)
-        req(input$shipname)
-        req(input$status)
+        req(input$shiptype_table)
+        req(input$shipname_table)
+        req(input$status_table)
         
         
-        if(input$status == "move"){
+        if(input$status_table == "move"){
             port_info_data() %>%
-                filter(ship_type == input$shiptype) %>%
-                filter(SHIPNAME == input$shipname) %>%
+                filter(ship_type == input$shiptype_table) %>%
+                filter(SHIPNAME == input$shipname_table) %>%
                 filter(is_parked == 0)
-        } else if(input$status == "parked"){
+        } else if(input$status_table == "parked"){
             port_info_data() %>%
-                filter(ship_type == input$shiptype) %>%
-                filter(SHIPNAME == input$shipname) %>%
+                filter(ship_type == input$shiptype_table) %>%
+                filter(SHIPNAME == input$shipname_table) %>%
                 filter(is_parked == 1)
         } else {
             port_info_data() %>%
-                filter(ship_type == input$shiptype) %>%
-                filter(SHIPNAME == input$shipname) 
+                filter(ship_type == input$shiptype_table) %>%
+                filter(SHIPNAME == input$shipname_table) 
         }
         
     })
     
     filtered_data <- reactive({
-        dateSelected <- dmy(input$selectDate)
+        dateSelected <- dmy(input$selectDate_table)
         
-        if(length(input$selectDate) > 0){
+        if(length(input$selectDate_table) > 0){
             data_sample() %>%
                 filter(date %in% dateSelected)
         } else {
@@ -1199,57 +1225,57 @@ table_server <- function(input, output, session) {
         choices <- format(unique(data_sample()$date), i18n()$t('%d %B %Y'))
         
         #month_list <- list(`January` = list(),
-                           #`February` = list(),
-                           #`March` = list(),
-                           #`April` = list(),
-                           #`May` = list(),
-                           #`June` = list(),
-                           #`July` = list(),
-                           #`August` = list(),
-                           #`September` = list(),
-                           #`October` = list(),
-                           #`November` = list(),
-                           #`December` = list())
+        #`February` = list(),
+        #`March` = list(),
+        #`April` = list(),
+        #`May` = list(),
+        #`June` = list(),
+        #`July` = list(),
+        #`August` = list(),
+        #`September` = list(),
+        #`October` = list(),
+        #`November` = list(),
+        #`December` = list())
         
         #if(length(choices) < 1){
-            #month_list <- choices
+        #month_list <- choices
         #} else {
-            #for (x in 1:length(choices)) {
-                #if(length(choices) == 1) {
-                    #if(month(choices[x]) == '1'){ month_list$January <- list(format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '2'){ month_list$February <- list(format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '3'){ month_list$March <- list(format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '4'){ month_list$April <- list(format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '5'){ month_list$May <- list(format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '6'){ month_list$June <- list(format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '7'){ month_list$July <- list(format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '8'){ month_list$August <- list(format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '9'){ month_list$September <- list(format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '10'){ month_list$October <- list(format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '11'){ month_list$November <- list(format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '12'){ month_list$December <- list(format(choices[x], '%d %B %Y')) }
-                #} else {
-                    #if(month(choices[x]) == '1'){ month_list$January <- append(month_list$January, format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '2'){ month_list$February <- append(month_list$February, format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '3'){ month_list$March <- append(month_list$March, format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '4'){ month_list$April <- append(month_list$April, format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '5'){ month_list$May <- append(month_list$May, format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '6'){ month_list$June <- append(month_list$June, format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '7'){ month_list$July <- append(month_list$July, format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '8'){ month_list$August <- append(month_list$August, format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '9'){ month_list$September <- append(month_list$September, format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '10'){ month_list$October <- append(month_list$October, format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '11'){ month_list$November <- append(month_list$November, format(choices[x], '%d %B %Y')) }
-                    #if(month(choices[x]) == '12'){ month_list$December <- append(month_list$December, format(choices[x], '%d %B %Y')) }    
-                #}
-                
-            #}
+        #for (x in 1:length(choices)) {
+        #if(length(choices) == 1) {
+        #if(month(choices[x]) == '1'){ month_list$January <- list(format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '2'){ month_list$February <- list(format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '3'){ month_list$March <- list(format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '4'){ month_list$April <- list(format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '5'){ month_list$May <- list(format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '6'){ month_list$June <- list(format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '7'){ month_list$July <- list(format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '8'){ month_list$August <- list(format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '9'){ month_list$September <- list(format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '10'){ month_list$October <- list(format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '11'){ month_list$November <- list(format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '12'){ month_list$December <- list(format(choices[x], '%d %B %Y')) }
+        #} else {
+        #if(month(choices[x]) == '1'){ month_list$January <- append(month_list$January, format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '2'){ month_list$February <- append(month_list$February, format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '3'){ month_list$March <- append(month_list$March, format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '4'){ month_list$April <- append(month_list$April, format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '5'){ month_list$May <- append(month_list$May, format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '6'){ month_list$June <- append(month_list$June, format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '7'){ month_list$July <- append(month_list$July, format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '8'){ month_list$August <- append(month_list$August, format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '9'){ month_list$September <- append(month_list$September, format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '10'){ month_list$October <- append(month_list$October, format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '11'){ month_list$November <- append(month_list$November, format(choices[x], '%d %B %Y')) }
+        #if(month(choices[x]) == '12'){ month_list$December <- append(month_list$December, format(choices[x], '%d %B %Y')) }    
         #}
         
-        if(!input$specificDates){
-            updateSelectInput(session, "selectDate", NULL, choices = c("No values"), selected = NULL)
+        #}
+        #}
+        
+        if(!input$specificDates_table){
+            updateSelectInput(session, "selectDate_table", NULL, choices = c("No values"), selected = NULL)
         } else {
-            updateSelectInput(session, "selectDate", NULL, choices = choices)
+            updateSelectInput(session, "selectDate_table", NULL, choices = choices)
         }
         
         
@@ -1263,27 +1289,27 @@ table_server <- function(input, output, session) {
         
         
         if(input$selectedLanguage == 'PL'){
-            shiny::updateRadioButtons(session, "status", label = "", 
+            shiny::updateRadioButtons(session, "status_table", label = "", 
                                       choices = c("W ruchu" = "move", "Zaparkowany" = "parked", "Obie" = "both"),
                                       selected = "both")
         }
         if(input$selectedLanguage == 'EN'){
-            shiny::updateRadioButtons(session, "status", label = "", 
+            shiny::updateRadioButtons(session, "status_table", label = "", 
                                       choices = c("In move" = "move", "Parked" = "parked", "Both" = "both"),
                                       selected = "both")
         }
         if(input$selectedLanguage == 'ES'){
-            shiny::updateRadioButtons(session, "status", label = "", 
+            shiny::updateRadioButtons(session, "status_table", label = "", 
                                       choices = c("Moviente" = "move", "Estacionado" = "parked", "Ambos" = "both"),
                                       selected = "both")
         }
         if(input$selectedLanguage == 'DE'){
-            shiny::updateRadioButtons(session, "status", label = "", 
+            shiny::updateRadioButtons(session, "status_table", label = "", 
                                       choices = c("Ziehen um" = "move", "Geparkt" = "parked", "Beide" = "both"),
                                       selected = "both")
         }
         if(input$selectedLanguage == 'RU'){
-            shiny::updateRadioButtons(session, "status", label = "", 
+            shiny::updateRadioButtons(session, "status_table", label = "", 
                                       choices = c("В Движении" = "move", "Припаркованные" = "parked", "Оба" = "both"),
                                       selected = "both")
         }
@@ -1295,7 +1321,7 @@ table_server <- function(input, output, session) {
 
 
 router <- make_router(
-    route("/", root_page, observationinfo_server),
+    route("/", root_page, server = observationinfo_server),
     route("other", other_page, port_server),
     route("charts", charts_page, chart_server),
     route("table", table_page, table_server)
@@ -1335,17 +1361,15 @@ ui <- semanticPage(
                     )
                 )
                 
-                ),
-
-
+    ),
     
-    router_ui() 
-    #router$ui
+    #router_ui() 
+    router$ui
 )
 
 server <- function(input, output, session) {
-    router(input, output, session) 
-    #router$server(input, output, session)
+    #router_server(input, output, session) 
+    router$server(input, output, session)
     
     observeEvent(input$selectedLanguage, {
         # This print is just for demonstration
